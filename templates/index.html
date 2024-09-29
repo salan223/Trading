@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="hero-section">
+        <h2>Track, Analyze, and Learn the Stock Market</h2>
+        <p>Enter a stock ticker to get real-time analysis and market insights.</p>
+    </div>
+
+    <div class="container">
+        <h1 style="text-align: center;">Stock Analyzer</h1> <!-- Centered the header -->
+        <div class="form-container">
+            <form method="POST">
+                <div class="dropdown">
+                    <input type="text" id="ticker" name="ticker" placeholder="Enter Stock Ticker (e.g., AAPL)" required onkeyup="fetchSuggestions()">
+                    <div class="dropdown-content" id="dropdown"></div>
+                </div>
+                <input type="submit" value="Analyze">
+            </form>
+        </div>
+
+        {% if ticker %}
+        <div class="analysis">
+            <h2>Analysis for {{ ticker }} ({{ analysis.stock_full_name }})</h2>
+            <p>Current Price: ${{ analysis.current_price }}</p>
+            <p>Average Price (1 Year): ${{ analysis.average_price }}</p>
+            <p>Valuation: <strong>{{ analysis.valuation }}</strong></p>
+            <p>{{ analysis.valuation_detail }}</p>
+            <p>Market Trend: <strong>{{ analysis.trend_direction }}</strong></p>
+        </div>
+
+        <div class="chart">
+            {{ chart|safe }}
+        </div>
+
+        <div class="future-predictions" style="text-align: center;">
+            <h3>Future Price Predictions (Next 6 Months)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Predicted Price (USD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(6) %}
+                    <tr>
+                        <td>{{ future_months[i] }}</td> <!-- Updated month logic to start from the current month -->
+                        <td>{{ analysis.prediction_table['Predicted Price'][i] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p><strong>Analysis Method:</strong> Predictions for the next 6 months are based on linear regression using the stock's historical closing prices over the past year.</p>
+        </div>
+
+        <div class="news">
+            <h2>Latest News</h2>
+            <ul>
+                {% for article in news %}
+                <li>
+                    <a href="{{ article.url }}" target="_blank" style="color: white; font-weight: bold;">{{ article.title }}</a>
+                    <p>{{ article.description }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="learning-resources">
+            <h2>Learn More About Trading</h2>
+            <ul>
+                <li><a href="https://www.investopedia.com/articles/basics/06/invest1000.asp" target="_blank">Investopedia - Trading Basics</a></li>
+                <li><a href="https://www.babypips.com/" target="_blank">BabyPips - Forex Trading School</a></li>
+                <li><a href="https://www.thebalance.com/trading-basics-101-4581163" target="_blank">The Balance - Stock Market Trading</a></li>
+            </ul>
+        </div>
+
+        <div class="referral-section" style="text-align: center; margin-top: 40px;">
+            <h3>Start Your Investing Journey</h3>
+            <p>Let’s both get $25 when you fund a Wealthsimple account. Use my referral code: HOHG0G 🎁 T&Cs apply.
+             You'll get <strong>$25</strong> when you deposit $100!</p>
+            <a href="https://wealthsimple.com/invite/H0HG0G" target="_blank" class="referral-button" style="padding: 10px 20px; background-color: #009688; color: white; text-decoration: none; border-radius: 5px;">Get Started with Wealthsimple</a>
+        </div>
+        
+    </div>
+
+    <script>
+        function fetchSuggestions() {
+            const input = document.getElementById('ticker').value;
+            if (input.length > 0) {
+                fetch(`/autocomplete?q=${input}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const dropdown = document.getElementById('dropdown');
+                        dropdown.innerHTML = "";
+                        dropdown.style.display = "block";
+                        data.forEach(item => {
+                            const div = document.createElement('div');
+                            div.innerText = item;
+                            div.onclick = () => {
+                                document.getElementById('ticker').value = item;
+                                dropdown.style.display = "none";
+                            };
+                            dropdown.appendChild(div);
+                        });
+                    });
+            } else {
+                document.getElementById('dropdown').style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+/* General body and font settings */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* Increase the width of the main container and center it */
+.container {
+    max-width: 1000px;  /* Increased width for better layout */
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Hero section settings */
+.hero-section {
+    text-align: center;
+    padding: 60px 0;
+    background-color: #202020;
+    color: white;
+}
+
+/* Centering text for all headers */
+h1, h2, h3 {
+    text-align: center;
+}
+
+/* Form container styling */
+.form-container {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 220px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333333;
+    color: #e0e0e0;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #009688;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #00796b;
+}
+
+/* Dropdown styling */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 240px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    z-index: 1;
+    width: 100%;
+}
+
+.dropdown-content div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-content div:hover {
+    background-color: #555;
+}
+
+/* Chart container */
+.chart {
+    margin-top: 20px;
+}
+
+/* Future price prediction table styling */
+.future-predictions table {
+    width: 100%; /* Ensures the table spans the entire container */
+    border-collapse: collapse;
+    margin: 20px 0;
+    text-align: center;  /* Center the table contents */
+}
+
+.future-predictions th, td {
+    padding: 10px;
+    border: 1px solid #444;
+}
+
+.future-predictions th {
+    background-color: #009688;
+    color: white;
+}
+
+/* News section */
+.news ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.news li {
+    margin-bottom: 15px;
+}
+
+.news a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.news a:hover {
+    text-decoration: underline;
+}
+
+/* Learning resources section */
+.learning-resources {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.learning-resources ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.learning-resources li {
+    margin-bottom: 10px;
+}
+
+.learning-resources li a {
+    color: #80cbc4;
+    font-size: 1.2rem;
+}
+
+.learning-resources li a:hover {
+    color: #4db6ac;
+}
